@@ -9,6 +9,8 @@ services:
     depends_on:
       - postgres
     restart: on-failure
+    networks:
+      - backend
   frontend:
     container_name: frontend
     build: ./frontend
@@ -22,5 +24,15 @@ services:
     env_file: ./.env
     volumes:
       - ~/pg-data:/var/lib/postgresql/data/pgdata
+    networks:
+      - internal-network
+      - backend
+
+networks:
+  internal-network:
+    driver: bridge
+    internal: true
+  backend:
+    driver: bridge 
     
     

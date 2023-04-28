@@ -21,12 +21,15 @@ services:
     image: "postgres:12"
     env_file: ./.env
     volumes:
-      - ~/pg-data:/var/lib/postgresql/data/pgdata
+      - db-data:/var/lib/postgresql/data/pgdata
     restart: on-failure
     networks:
       - internal-network
       - backend
 
+volumes:
+  db-data:
+  
 networks:
   internal-network:
     driver: bridge

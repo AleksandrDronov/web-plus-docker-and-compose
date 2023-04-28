@@ -15,9 +15,9 @@ WORKDIR /app
 COPY --from=builder /app/package*.json ./
 # Устанавливаем только зависимости, необходимые в продакшене
 # --omit=dev означает пропустить dev-зависимости
-RUN npm i --omit=dev && npm i pm2 -g
+RUN npm сi --omit=dev --no-audit && npm i pm2 -g
 # Копируем директорию со сборкой приложения
-COPY --from=builder /app/dist ./dist 
+COPY --from=builder /app/dist ./dist
 EXPOSE 4000
 # Указываем команду для запуска приложения
 CMD ["pm2-runtime", "start", "./dist/main.js"]
